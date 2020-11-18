@@ -12,3 +12,5 @@ Player Type:
 
 
 Sample input file is present in /src/player_info.csv .
+
+I have used NetBeans 12.1 IDE to create this. You can easily import this into Netbeans to run or edit it.
