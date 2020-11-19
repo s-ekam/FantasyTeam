@@ -31,26 +31,21 @@ public class FantsyTeam {
         System.out.println("Total number of players = " + team.getPlayers().size());
 
         System.out.println("Finding best team... Please wait & Enjoy some coffee...");
+
         findBestTeamKP(team, 0);
+
         if (Team.bestTeam != null) {
             ArrayList<Player> selected = Team.bestTeam.getSelectedPlayers();
 
             System.out.println("Budget Required = " + Team.bestTeam.getTeamCost());
             System.out.println("MAX Points = " + Team.bestTeam.getTeamTotal());
 
-//            int points = 0, cost = 0;
             for (Player p : selected) {
                 System.out.println(p);
-//                points += p.getPoint();
-//                cost += p.getCost();
             }
-
-//            System.out.println(cost);
-//            System.out.println(points);
         } else {
             System.out.println("NO TEAM POSSIBLE");
         }
-        // TODO code application logic here
     }
 
     public static Team inputTeamDetails(String fileLocation) {
@@ -68,6 +63,7 @@ public class FantsyTeam {
             }
 
             team.addPlayers(players);
+            team.setSelected(new int[players.size()]);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FantsyTeam.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -20,6 +20,8 @@ public class Team implements Cloneable {
 
     private Lineup lineup;
 
+    private int selected[];
+
     public Team() {
         players = new ArrayList<>();
         lineup = new Lineup();
@@ -27,8 +29,8 @@ public class Team implements Cloneable {
 
     void selectPlayer(int index) {
         Player p = players.get(index);
-
-        p.setIncluded(true);
+        selected[index] = 1;
+//        p.setIncluded(true);
         lineup.addPlayer(p);
     }
 
@@ -58,13 +60,13 @@ public class Team implements Cloneable {
     }
 
     public ArrayList<Player> getSelectedPlayers() {
-        ArrayList<Player> selected = new ArrayList<>();
-        for (Player x : players) {
-            if (x.isIncluded()) {
-                selected.add(x);
+        ArrayList<Player> selectedList = new ArrayList<>();
+        for (int i = 0; i < selected.length; i++) {
+            if (selected[i] == 1) {
+                selectedList.add(players.get(i));
             }
         }
-        return selected;
+        return selectedList;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -83,17 +85,28 @@ public class Team implements Cloneable {
         this.lineup = lineup;
     }
 
+    public int[] getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int[] selected) {
+        this.selected = selected;
+    }
+
     @Override
     public Team clone() {
         Team team = null;
         try {
             team = (Team) super.clone();
-            ArrayList<Player> playerClone = new ArrayList<Player>();
-            for (Player p : this.players) {
-                playerClone.add(p.clone());
-            }
-            team.players = playerClone;
+//            ArrayList<Player> playerClone = new ArrayList<Player>();
+//            for (Player p : this.players) {
+//                playerClone.add(p.clone());
+//            }
+//            team.players = playerClone;
             team.lineup = (Lineup) this.lineup.clone();
+//            team.selected = this.selected.clone();
+            team.selected = new int[this.selected.length];
+            System.arraycopy(this.selected, 0, team.selected, 0, this.selected.length);
         } catch (CloneNotSupportedException e) {
             System.out.println(e.getMessage());
         }
